@@ -1,0 +1,33 @@
+<div class="container">
+
+<h1>THIS IS LIST PAGE</h1>
+
+ <%= render "layouts/flash" %>
+
+  <% @posts.each do |post| %>
+    <li>
+      <%= post.title %>
+      <%= post.link %>
+      <%= post.user_id %>
+
+      <%= link_to "Comments", post_comments_path(post), :class=>"btn btn-primary"%>
+
+      <%= bootstrap_form_for [post, @vote] do |v| %>
+        <%= v.hidden_field :value, value: "1" %>
+        <%= v.button "", class: "btn btn-primary glyphicon glyphicon-arrow-up" %>
+      <% end %>
+
+       <!--  <div class="score"> 0 </div> -->
+       <%= post.votes.reduce(0){|sum,v| sum += v.value} %>
+
+      <%= bootstrap_form_for [post, @vote] do |v| %>
+        <%= v.hidden_field :value, value: "-1" %>
+        <%= v.button "", class: "btn btn-danger glyphicon glyphicon-arrow-down" %>
+
+      <% end %>
+
+
+    </li>
+  <% end %>
+
+</div>

@@ -1,0 +1,13 @@
+<div class="row">
+ <div class="col-md-6 col-md-offset-3">
+   <h1 class='text-center'>Create a New Comment</h1>
+
+ <%= render "layouts/flash" %>
+
+   <%= bootstrap_form_for [@post, @comment] do |f| %>
+     <%= f.text_area :body, placeholder: "Enter a Comment"%>
+
+     <%= f.submit "Submit", class: "btn btn-primary" %>
+   <% end %>
+ </div>
+</div>

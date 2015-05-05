@@ -1,0 +1,32 @@
+THIS IS MY COMMENTS INDEX PAGE
+
+
+<%= link_to "Add a Comment", new_post_comment_path, :class=>"btn btn-primary" %>
+
+
+<% @post.comments.each do |comment| %>
+    <li>
+      <%= comment.body %>
+      <%= comment.user_id %>
+      <%= comment.post_id %>
+
+
+      <%= bootstrap_form_for [@post, comment, @vote] do |v| %>
+        <%= v.hidden_field :value, value: "1" %>
+        <%= v.button "", class: "btn btn-primary glyphicon glyphicon-arrow-up" %>
+      <% end %>
+
+       <!--  <div class="score"> 0 </div> -->
+       <%= comment.votes.reduce(0){|sum,v| sum += v.value} %>
+
+      <%= bootstrap_form_for [@post, comment, @vote] do |v| %>
+        <%= v.hidden_field :value, value: "-1" %>
+        <%= v.button "", class: "btn btn-danger glyphicon glyphicon-arrow-down" %>
+
+      <% end %>
+
+
+
+
+    </li>
+  <% end %>
